@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './app.css';
+import Button from '@material-ui/core/Button';
 import ReactImage from './react.png';
 
 export default class App extends Component {
@@ -17,6 +18,9 @@ export default class App extends Component {
       <div>
         {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
         <img src={ReactImage} alt="react" />
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
       </div>
     );
   }
