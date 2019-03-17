@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import './app.css';
 import Button from '@material-ui/core/Button';
-import ReactImage from './react.png';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { blue, deepOrange } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: deepOrange
+  }
+});
 
 export default class App extends Component {
   state = { username: null };
@@ -15,13 +23,17 @@ export default class App extends Component {
   render() {
     const { username } = this.state;
     return (
-      <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div>
+          {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
+          <Button variant="raised" color="primary">
+            Host New Game
+          </Button>
+          <Button variant="contained" color="secondary">
+            Join Game
+          </Button>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
