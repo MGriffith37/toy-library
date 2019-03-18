@@ -1,27 +1,20 @@
-import React, { Component } from 'react';
-import './app.css';
-import Button from '@material-ui/core/Button';
-import ReactImage from './react.png';
+import React, { Component } from "react";
+import "./app.css";
+import Button from "@material-ui/core/Button";
+import ReactImage from "./react.png";
+import Host from "./Host.js";
 
 export default class App extends Component {
   state = { username: null };
 
   componentDidMount() {
-    fetch('/api/getUsername')
+    fetch("/api/getUsername")
       .then(res => res.json())
       .then(user => this.setState({ username: user.username }));
   }
 
   render() {
     const { username } = this.state;
-    return (
-      <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </div>
-    );
+    return <Host />;
   }
 }
