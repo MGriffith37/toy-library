@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import MediaQuery from 'react-responsive';
-import { Link } from 'react-router-dom';
-import * as routes from '../constants/routes';
+import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
+import MediaQuery from "react-responsive";
+import { Link } from "react-router-dom";
+import * as routes from "../constants/routes";
+import AppBar from "../components/AppBar";
+import HostDrawer from "../components/HostDrawer";
 
 class Landing extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class Landing extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/getUsername')
+    fetch("/api/getUsername")
       .then(res => res.json())
       .then(user => this.setState({ username: user.username }));
   }
@@ -20,11 +22,26 @@ class Landing extends Component {
     const { username } = this.state;
     return (
       <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <Button component={Link} to={routes.HOST} variant="contained" color="primary">
+        <AppBar title="New Project" />
+        {username ? (
+          <h1>{`Hello ${username}`}</h1>
+        ) : (
+          <h1>Loading.. please wait!</h1>
+        )}
+        <Button
+          component={Link}
+          to={routes.HOST}
+          variant="contained"
+          color="primary"
+        >
           Host New Game
         </Button>
-        <Button component={Link} to={routes.HOST} variant="contained" color="secondary">
+        <Button
+          component={Link}
+          to={routes.JOIN}
+          variant="contained"
+          color="secondary"
+        >
           Join Game
         </Button>
 
@@ -47,6 +64,8 @@ class Landing extends Component {
         <MediaQuery query="(orientation: landscape)">
           <div>You are landscape</div>
         </MediaQuery>
+
+        <HostDrawer />
       </div>
     );
   }
